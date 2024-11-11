@@ -7,10 +7,10 @@
 Melee20Button::Melee20Button(socd::SocdType socd_type, Melee20ButtonOptions options) {
     _socd_pair_count = 4;
     _socd_pairs = new socd::SocdPair[_socd_pair_count]{
-        socd::SocdPair{&InputState::left,    &InputState::right,   socd_type},
-        socd::SocdPair{ &InputState::down,   &InputState::up,      socd_type},
-        socd::SocdPair{ &InputState::c_left, &InputState::c_right, socd_type},
-        socd::SocdPair{ &InputState::c_down, &InputState::c_up,    socd_type},
+        socd::SocdPair{&InputState::left,    &InputState::right,   SOCD_NEUTRAL},
+        socd::SocdPair{ &InputState::down,   &InputState::up,      SOCD_NEUTRAL},
+        socd::SocdPair{ &InputState::c_left, &InputState::c_right, SOCD_NEUTRAL},
+        socd::SocdPair{ &InputState::c_down, &InputState::c_up,    SOCD_NEUTRAL},
     };
 
     _options = options;
@@ -99,7 +99,7 @@ void Melee20Button::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs
         /* Up B angles */
         if (directions.diagonal && !shield_button_pressed) {
             // 22.9638 - 7375 3125 = 59 25
-            outputs.leftStickX = 128 + (directions.x * 59);
+            outputs.leftStickX = 128 + (directions.x * 58);
             outputs.leftStickY = 128 + (directions.y * 25);
             // 27.37104 - 7000 3625 (27.38) = 56 29
             if (inputs.c_down) {
@@ -108,18 +108,18 @@ void Melee20Button::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs
             }
             // 31.77828 - 7875 4875 (31.76) = 63 39
             if (inputs.c_left) {
-                outputs.leftStickX = 128 + (directions.x * 63);
-                outputs.leftStickY = 128 + (directions.y * 39);
+                outputs.leftStickX = 128 + (directions.x * 53);
+                outputs.leftStickY = 128 + (directions.y * 33);
             }
             // 36.18552 - 7000 5125 (36.21) = 56 41
             if (inputs.c_up) {
-                outputs.leftStickX = 128 + (directions.x * 56);
-                outputs.leftStickY = 128 + (directions.y * 41);
+                outputs.leftStickX = 128 + (directions.x * 51);
+                outputs.leftStickY = 128 + (directions.y * 37);
             }
             // 40.59276 - 6125 5250 (40.6) = 49 42
             if (inputs.c_right) {
                 outputs.leftStickX = 128 + (directions.x * 49);
-                outputs.leftStickY = 128 + (directions.y * 42);
+                outputs.leftStickY = 128 + (directions.y * 41);
             }
 
             /* Extended Up B Angles */
@@ -139,13 +139,13 @@ void Melee20Button::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs
                 }
                 // 36.18552 - 7375 5375 (36.1) = 59 43
                 if (inputs.c_up) {
-                    outputs.leftStickX = 128 + (directions.x * 59);
-                    outputs.leftStickY = 128 + (directions.y * 43);
+                    outputs.leftStickX = 128 + (directions.x * 58);
+                    outputs.leftStickY = 128 + (directions.y * 42);
                 }
                 // 40.59276 - 6375 5375 (40.1) = 51 43
                 if (inputs.c_right) {
                     outputs.leftStickX = 128 + (directions.x * 51);
-                    outputs.leftStickY = 128 + (directions.y * 43);
+                    outputs.leftStickY = 128 + (directions.y * 42);
                 }
             }
         }
@@ -169,8 +169,8 @@ void Melee20Button::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs
         }
         if (directions.diagonal && shield_button_pressed) {
             // MY + L, R, LS, and MS + q1/2 = 4750 8750 = 38 70
-            outputs.leftStickX = 128 + (directions.x * 38);
-            outputs.leftStickY = 128 + (directions.y * 70);
+            outputs.leftStickX = 128 + (directions.x * 35);
+            outputs.leftStickY = 128 + (directions.y * 71);
             // MY + L, R, LS, and MS + q3/4 = 5000 8500 = 40 68
             if (directions.y == -1) {
                 outputs.leftStickX = 128 + (directions.x * 40);
